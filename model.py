@@ -169,6 +169,28 @@ def check_consumption(number_product):
             return False
         if warehouse("грибы", 30) == False:
             return False
+    elif number_product == 5 and 2024 - born_year >= 18:
+        return True
+    elif number_product == 5 and 2024 - born_year < 18:
+        if warehouse("тесто", 90) == False:
+            return False
+        if warehouse("сыр", 30) == False:
+            return False
+        if warehouse("грибы", 20) == False:
+            return False
+        if warehouse("пепперони", 20) == False:
+            return False
+    elif number_product == 6 and 2024 - born_year >= 18:
+        if warehouse("кола", 40) == False:
+            return False
+        if warehouse("виски", 30) == False:
+            return False
+    elif number_product == 6 and 2024 - born_year < 18:
+        if warehouse("сок", 70) == False:
+            return False
+    elif number_product == 7 and 2024 - born_year >= 18:
+        if warehouse("кальянная_таблетка", 50) == False:
+            return False
 
 def craftPizza():
     with open('products.json', 'r', encoding='utf-8') as file:
