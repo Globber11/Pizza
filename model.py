@@ -202,3 +202,33 @@ def craftPizza():
             continue
         else:
             break
+def beerTypes():
+    with open('products.json', 'r', encoding='utf-8') as file:
+        products = json.load(file)
+    print('Выберите алкогольный напиток')
+    i = 0
+    for product in products:
+        i += 1
+        if 6 <= i <= 8:  # Показать продукты с 5 по 7
+            print(f' {product}')
+    while True:
+        productName = input(f'Введите название продукта, который вы хотите добавить: ')
+        if productName not in products:
+            print("Ошибка: продукт не найден. Пожалуйста, выберите продукт из списка.")
+            continue
+        try:
+            productQuantity = int(input('Введите количество продукта(максимальное количество 10): '))
+            if productQuantity <= 0:
+                print("Ошибка: количество должно быть положительным числом.")
+                continue
+            elif warehouse(productName, productQuantity)==False:
+                print("Ошибка: на складе не хватает этого продукта")
+                continue
+            elif productQuantity>=10:
+                print("Ошибка: вы превысили максимальное значение этого продукта")
+                continue
+            return productQuantity
+        except ValueError:
+            print("Ошибка: введите корректное число.")
+            continue
+
