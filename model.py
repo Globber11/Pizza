@@ -140,6 +140,36 @@ maxProductsQuatity = {
     'бекон': 25
 }
 
+def check_consumption(number_product):
+    if number_product == 1:
+        if warehouse("тесто", 200) == False:
+            return False
+        if warehouse("пепперони", 20) == False:
+            return False
+        if warehouse("сыр", 40) == False:
+            return False
+    elif number_product == 2:
+        if warehouse("тесто", 200) == False:
+            return False
+        if warehouse("томаты", 30) == False:
+            return False
+        if warehouse("сыр", 40) == False:
+            return False
+    elif number_product == 3:
+        if warehouse("тесто", 200) == False:
+            return False
+        if warehouse("сыр", 100) == False:
+            return False
+    elif number_product == 4:
+        if warehouse("тесто", 200) == False:
+            return False
+        if warehouse("сыр", 40) == False:
+            return False
+        if warehouse("ветчина", 30) == False:
+            return False
+        if warehouse("грибы", 30) == False:
+            return False
+
 def craftPizza():
     with open('products.json', 'r', encoding='utf-8') as file:
         products = json.load(file)
