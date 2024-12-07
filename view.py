@@ -1,3 +1,9 @@
+with open('menu18.json', 'r', encoding='utf-8') as file:
+    menu18 = file.read()
+with open('menu18.json', 'r', encoding='utf-8') as file:
+    menu = file.read()
+with open('cost.json', 'r', encoding='utf-8') as file:
+    cost = file.read()
 def check_decorator(func):
     def wrapper(*args, **kwargs):
         print("\n" + "="*30)
@@ -63,61 +69,14 @@ def buy(buskett):
         print('Такого варианта ответа нет!!!')
         buy(buskett)
     return [bought, CardOrNal]
-
-def menu(user_input):
-    products = {
-        1: 'пепперони',
-        2: 'маргарита',
-        3: 'четыре сыра',
-        4: 'ветчина и грибы',
-        5: 'минипицца',
-        6: 'сок',
-        7: 'создать свою пиццу'
-    }
-    return products[user_input]
-def menu18(user_input):
-    products = {
-        1: 'пепперони',
-        2: 'маргарита',
-        3: 'четыре сыра',
-        4: 'ветчина и грибы',
-        5: 'пиво',
-        6: 'виски с колой',
-        7: 'кальянчик',
-        8: 'создать свою пиццу'
-    }
-    return products[user_input]
 def printMenu():
     print('Меню: ')
     for i in range(1, 8):
-        print(f'   {i}){menu(i)}: {cost(menu(i))}')
+        print(f'   {i}){menu[i]}: {cost[menu[i]]}')
 def printMenu18():
     print('Меню: ')
     for i in range(1, 9):
-        print(f'   {i}){menu18(i)}: {cost18(menu18(i))}')
-def cost(key):
-    cost = {
-        'пепперони': 50,
-        'маргарита': 100,
-        'четыре сыра':200,
-        'ветчина и грибы':250,
-        'минипицца': 300,
-        'сок': 350,
-        'создать свою пиццу': 500
-    }
-    return cost[key]
-def cost18(key):
-    cost = {
-        'пепперони': 50,
-        'маргарита': 100,
-        'четыре сыра':200,
-        'ветчина и грибы':250,
-        'пиво': 300,
-        'виски с колой': 350,
-        'кальянчик': 400,
-        'создать свою пиццу': 500
-    }
-    return cost[key]
+        print(f'   {i}){menu18[i]}: {cost[menu18[i]]}')
 def print_menu(born_year):
     if 2024-born_year>=18:
         printMenu18()
