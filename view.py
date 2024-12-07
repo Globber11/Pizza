@@ -1,5 +1,3 @@
-from model import check_consumption
-
 def check_decorator(func):
     def wrapper(*args, **kwargs):
         print("\n" + "="*30)
@@ -34,6 +32,7 @@ def check(buskett, listD):
 
 
 def buy(buskett):
+    from model import check_consumption
     mostCost = 0
     for i in range(0,len(buskett),3):
         mostCost+=buskett[i+1]*buskett[i+2]
