@@ -245,6 +245,9 @@ def beerTypes():
 
 def craftPizza():
     # Загрузка продуктов из файла
+    with open('maxProductsQuatity.json', 'r', encoding='utf-8') as file:
+        maxProductsQuatity = json.load(file)
+    # Загрузка продуктов из файла
     with open('products.json', 'r', encoding='utf-8') as file:
         products = json.load(file)
 
