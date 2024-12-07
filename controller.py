@@ -36,7 +36,7 @@ def user(bornn_year):
 
 def admin():
     print('Добро пожаловать в панель администратора пиццерии!')
-    print('Доступные функции: 1 - вывод логов     2 - чистка логов     3 - вывод данных пользователей     4 - изменение стоимости товаров')
+    print('Доступные функции: 1 - вывод логов     2 - чистка логов     3 - вывод данных пользователей     4 - изменение стоимости товаров     5 - просмотр кол-ва продуктов на складе')
     while True
         func_choise = int(input())
 
@@ -56,7 +56,10 @@ def admin():
                 costs = file.read
             print(f'Нынешние цены: {costs}')
             edit_cost(input('Продукт: '), int(input('Новая цена: ')))
-
+        elif func_choise == 5:
+            with open('products.json', 'r', encoding='utf-8') as file:
+                poducts = file.read
+            print(poducts)
 def openPizza():
     born_year = reg_and_create_id()
 
