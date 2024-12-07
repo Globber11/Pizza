@@ -46,7 +46,7 @@ def admin():
             print(logs)
         elif func_choise == 2:
             with open('logs.txt', 'w', encoding='utf-8') as file:
-                file.write()
+                file.write('')
         elif func_choise == 3:
             with open('users_data.json', 'r', encoding='utf-8') as file:
                 users_data = file.read
