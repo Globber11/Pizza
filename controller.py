@@ -7,7 +7,7 @@ from view import check
 from model import craftPizza
 
 busket = []
-def zakaz(bornn_year):
+def user(bornn_year):
     print_menu(bornn_year)
 
     try:
@@ -21,21 +21,21 @@ def zakaz(bornn_year):
             user_number = int(input('введите количество: '))
         busketSave(busket, user_input, bornn_year, user_number)
         if input('Для продолжения заказа введите 1, иначе любой символ: ')=='1':
-            zakaz(bornn_year)
+            user(bornn_year)
         else:
             check(busket, buy(busket))
             print('♥♥♥Спасибо за заказ!♥♥♥\n   Приходите еще)')
             sys.exit()
     except KeyError:
         print('Такого варианта нет!!!')
-        zakaz(bornn_year)
+        user(bornn_year)
     except ValueError:
         print('Введите число а не букву!!!')
-        zakaz(bornn_year)
+        user(bornn_year)
 def openPizza():
     born_year = reg_and_create_id()
 
     if born_year == True:
-        
-    
-    zakaz(born_year)
+        admin()
+    else:
+        user(born_year)
