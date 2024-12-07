@@ -139,12 +139,6 @@ def warehouse(product, quantity):
     else:
         return False
 products = {}
-maxProductsQuatity = {
-    'пепперони': 20,
-    'томаты': 30,
-    'сыр': 50,
-    'бекон': 25
-}
 
 def check_consumption(number_product):
     if number_product == 1:
