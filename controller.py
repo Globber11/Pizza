@@ -1,10 +1,11 @@
 import sys
-from view import print_menu
 from model import busketSave
 from model import reg_and_create_id
+from model import craftPizza
+from model import edit_cost
 from view import buy
 from view import check
-from model import craftPizza
+from view import print_menu
 
 busket = []
 def user(bornn_year):
@@ -32,6 +33,27 @@ def user(bornn_year):
     except ValueError:
         print('Введите число а не букву!!!')
         user(bornn_year)
+
+def admin():
+    print('Добро пожаловать в панель администратора пиццерии!')
+    print('Доступные функции: 1 - вывод логов     2 - вывод данных пользователей     3 - изменение стоимости товаров')
+    while True
+        func_choise = int(input())
+
+        if func_choise == 1:
+            with open('logs.txt', 'r', encoding='utf-8') as file:
+                logs = file.read
+            print(logs)
+        elif func_choise == 2:
+            with open('users_data.json', 'r', encoding='utf-8') as file:
+                users_data = file.read
+            print(users_data)
+        elif func_choise == 3:
+            with open('cost.json', 'r', encoding='utf-8') as file:
+                costs = file.read
+            print(f'Нынешние цены: {costs}')
+            edit_cost(input('Продукт: '), int(input('Новая цена: ')))
+
 def openPizza():
     born_year = reg_and_create_id()
 
