@@ -1,9 +1,12 @@
 import json
 from random import seed, random
-from view import menu
-from view import menu18
-from view import cost
-from view import cost18
+
+with open('menu18.json', 'r', encoding='utf-8') as file:
+    menu18 = file.read()
+with open('menu18.json', 'r', encoding='utf-8') as file:
+    menu = file.read()
+with open('cost.json', 'r', encoding='utf-8') as file:
+    cost = file.read()
 def reg_and_create_id():
     with open("logs.txt", "a", encoding='utf-8') as file:
         file.write(f'\nНачат процесс регистрации/авторизации')
@@ -84,24 +87,24 @@ def reg_and_create_id():
 
 def busketSave(buskett, userIn, born_year, userNum=1):
     if 2024-born_year<18:
-        if menu(userIn) in buskett:
-            buskett[buskett.index(menu(userIn))+2]+=userNum
+        if menu[userIn] in buskett:
+            buskett[buskett.index(menu[userIn])+2]+=userNum
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
         else:
-            buskett.append(menu(userIn))
-            buskett.append(cost(menu(userIn)))
+            buskett.append(menu[userIn])
+            buskett.append(cost[menu[userIn]])
             buskett.append(userNum)
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
     else:
-        if menu(userIn) in buskett:
-            buskett[buskett.index(menu18(userIn))+2]+=userNum
+        if menu[userIn] in buskett:
+            buskett[buskett.index(menu18[userIn])+2]+=userNum
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
         else:
-            buskett.append(menu18(userIn))
-            buskett.append(cost18(menu18(userIn)))
+            buskett.append(menu18[userIn])
+            buskett.append(cost[menu18[userIn]])
             buskett.append(userNum)
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
@@ -194,59 +197,6 @@ def check_consumption(number_product):
     elif number_product == 7 and 2024 - born_year >= 18:
         if warehouse("кальянная_таблетка", 50) == False:
             return False
-
-def edit_cost(product, new_cost):
-    def load():
-        with open('cost.json', 'r', encoding='utf-8') as file:
-            content = file.read()
-            if content.strip():
-                return json.loads(content)
-            return []
-
-    def edit(products_):
-        for _ in products_:
-            if _ == product:
-                products_[product] = new_cost
-                return products_
-
-    def save(products_):
-        with open('cost.json', 'w', encoding='utf-8') as file:
-            json.dump(products_, file, ensure_ascii=False, indent=4)
-
-    save(edit(load()))
-
-def craftPizza():
-    with open('products.json', 'r', encoding='utf-8') as file:
-        products = json.load(file)
-    print('Выберите то из чего вы хотите сделать пиццу')
-    i = 0
-    for product in products:
-        i += 1
-        if 1 < i < 6:  # Показать продукты с 2 по 5
-            print(f' {product}')
-
-    while True:
-        productName = input(f'Введите название продукта, который вы хотите добавить: ')
-        if productName not in products:
-            print("Ошибка: продукт не найден. Пожалуйста, выберите продукт из списка.")
-            continue
-        try:
-            productQuantity = int(input(f'Введите количество продукта(максимальное количество {maxProductsQuatity[productName]}): '))
-            if productQuantity <= 0:
-                print("Ошибка: количество должно быть положительным числом.")
-                continue
-            elif warehouse(productName, productQuantity)==False:
-                print("Ошибка: на складе не хватает этого продукта")
-                continue
-            elif productQuantity>=maxProductsQuatity[productName]:
-                print("Ошибка: вы превысили максимальное значение этого продукта")
-                continue
-        except ValueError:
-            print("Ошибка: введите корректное число.")
-        if input('Если хотите продолжить добавление ингредиентов введите 1, иначе любой другой символ:')=='1':
-            continue
-        else:
-            break
 def beerTypes():
     with open('products.json', 'r', encoding='utf-8') as file:
         products = json.load(file)
@@ -276,4 +226,62 @@ def beerTypes():
         except ValueError:
             print("Ошибка: введите корректное число.")
             continue
+
+
+def craftPizza():
+    # Загрузка продуктов из файла
+    with open('products.json', 'r', encoding='utf-8') as file:
+        products = json.load(file)
+
+    print('Выберите то, из чего вы хотите сделать пиццу:')
+
+    # Показать продукты с 2 по 5
+    for i, product in enumerate(products, start=1):
+        if 1 < i < 8:
+            print(f' {product}')
+
+    while True:
+        productName = input('Введите название продукта, который вы хотите добавить: ')
+
+        # Проверка на наличие продукта в списке
+        if productName not in products:
+            print("Ошибка: продукт не найден. Пожалуйста, выберите продукт из списка.")
+            continue
+
+        try:
+            # Запрос количества продукта
+            productQuantity = int(
+                input(f'Введите количество продукта (максимальное количество {maxProductsQuatity[productName]}): '))
+
+            # Проверка на положительное число
+            if productQuantity <= 0:
+                print("Ошибка: количество должно быть положительным числом.")
+                continue
+
+            # Проверка наличия на складе
+            if not warehouse(productName, productQuantity):
+                print("Ошибка: на складе не хватает этого продукта.")
+                continue
+
+            # Проверка на превышение максимального количества
+            if productQuantity > maxProductsQuatity[productName]:
+                print("Ошибка: вы превысили максимальное значение этого продукта.")
+                continue
+
+        except ValueError:
+            print("Ошибка: введите корректное число.")
+            continue
+        except KeyError:
+            print(f"Ошибка: продукт '{productName}' не найден в максимальных количествах.")
+            continue
+        except Exception as e:
+            print(f"Произошла непредвиденная ошибка: {e}")
+            continue
+
+        # Запрос на продолжение добавления ингредиентов
+        if input('Если хотите продолжить добавление ингредиентов, введите 1, иначе любой другой символ: ') == '1':
+            continue
+        else:
+            break
+
 
