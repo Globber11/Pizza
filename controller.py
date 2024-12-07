@@ -36,7 +36,7 @@ def user(bornn_year):
 
 def admin():
     print('Добро пожаловать в панель администратора пиццерии!')
-    print('Доступные функции: 1 - вывод логов     2 - вывод данных пользователей     3 - изменение стоимости товаров')
+    print('Доступные функции: 1 - вывод логов     2 - чистка логов     3 - вывод данных пользователей     4 - изменение стоимости товаров')
     while True
         func_choise = int(input())
 
@@ -45,10 +45,13 @@ def admin():
                 logs = file.read
             print(logs)
         elif func_choise == 2:
+            with open('logs.txt', 'w', encoding='utf-8') as file:
+                file.write()
+        elif func_choise == 3:
             with open('users_data.json', 'r', encoding='utf-8') as file:
                 users_data = file.read
             print(users_data)
-        elif func_choise == 3:
+        elif func_choise == 4:
             with open('cost.json', 'r', encoding='utf-8') as file:
                 costs = file.read
             print(f'Нынешние цены: {costs}')
