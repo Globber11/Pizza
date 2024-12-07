@@ -195,6 +195,26 @@ def check_consumption(number_product):
         if warehouse("кальянная_таблетка", 50) == False:
             return False
 
+def edit_cost(product, new_cost):
+    def load():
+        with open('cost.json', 'r', encoding='utf-8') as file:
+            content = file.read()
+            if content.strip():
+                return json.loads(content)
+            return []
+
+    def edit(products_):
+        for _ in products_:
+            if _ == product:
+                products_[product] = new_cost
+                return products_
+
+    def save(products_):
+        with open('cost.json', 'w', encoding='utf-8') as file:
+            json.dump(products_, file, ensure_ascii=False, indent=4)
+
+    save(edit(load()))
+
 def craftPizza():
     with open('products.json', 'r', encoding='utf-8') as file:
         products = json.load(file)
