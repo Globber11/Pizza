@@ -7,6 +7,7 @@ with open('menu18.json', 'r', encoding='utf-8') as file:
     menu = file.read()
 with open('cost.json', 'r', encoding='utf-8') as file:
     cost = file.read()
+
 def reg_and_create_id():
     with open("logs.txt", "a", encoding='utf-8') as file:
         file.write(f'\nНачат процесс регистрации/авторизации')
@@ -139,6 +140,26 @@ def warehouse(product, quantity):
     else:
         return False
 products = {}
+
+def edit_cost(product, new_cost):
+    def load():
+        with open('cost.json', 'r', encoding='utf-8') as file:
+            content = file.read()
+            if content.strip():
+                return json.loads(content)
+            return []
+
+    def edit(products_):
+        for _ in products_:
+            if _ == product:
+                products_[product] = new_cost
+                return products_
+
+    def save(products_):
+        with open('cost.json', 'w', encoding='utf-8') as file:
+            json.dump(products_, file, ensure_ascii=False, indent=4)
+
+    save(edit(load()))
 
 def check_consumption(number_product):
     if number_product == 1:
