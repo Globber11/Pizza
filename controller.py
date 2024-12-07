@@ -34,4 +34,8 @@ def zakaz(bornn_year):
         zakaz(bornn_year)
 def openPizza():
     born_year = reg_and_create_id()
+
+    if born_year == True:
+        
+    
     zakaz(born_year)
