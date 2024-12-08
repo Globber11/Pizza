@@ -24,8 +24,12 @@ def check(buskett, listD):
     moreCost = 0
     print('Ваш чек:')
     for i in range(0,len(buskett),3):
-        print(f"{buskett[i]}: {buskett[i+1]} x {buskett[i+2]}шт")
-        moreCost+=buskett[i+1]*buskett[i+2]
+        if buskett[i] == 'создать свою пиццу':
+            print(f"{buskett[i]}: {buskett[i + 2]} x 1шт")
+            moreCost += buskett[i + 2]
+        else:
+            print(f"{buskett[i]}: {buskett[i+1]} x {buskett[i+2]}шт")
+            moreCost+=buskett[i+1]*buskett[i+2]
     print(' ')
     if listD[0]==1:
         print(f'Внесено: {listD[1]}')
@@ -49,7 +53,10 @@ def buy(buskett):
     from model import check_consumption
     mostCost = 0
     for i in range(0,len(buskett),3):
-        mostCost+=buskett[i+1]*buskett[i+2]
+        if buskett[i] == 'создать свою пиццу':
+            mostCost += buskett[i + 2]
+        else:
+            mostCost+=buskett[i+1]*buskett[i+2]
     print(f'Итого к оплате: {mostCost}')
     print('Оплата картой или наличными?')
     print('1)Наличные\n2)Карта')
