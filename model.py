@@ -52,7 +52,7 @@ def reg_and_create_id():
         try:
             born_year = int(input('Год рождения:'))
             if born_year < 1900:
-                print(f'Кому ты {\displaystyle {\boldsymbol {\pi }}}здиш, тебе точно не больше ста лет')
+                print(f'Кому ты πздиш, тебе точно не больше ста лет')
                 continue
             break
         except ValueError:
