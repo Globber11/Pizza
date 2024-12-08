@@ -1,9 +1,17 @@
+import json
+import dpath
+def swap_quotes(s: str) -> str:
+  dict = { '"':"'", "'":'"' }
+  return ''.join(dict.get(c, c) for c in s)
+with open('menu.json', 'r', encoding='utf-8') as file:
+    menu = file.read()
+    menu = json.loads(menu)
 with open('menu18.json', 'r', encoding='utf-8') as file:
     menu18 = file.read()
-with open('menu18.json', 'r', encoding='utf-8') as file:
-    menu = file.read()
+    menu18 = json.loads(menu18)
 with open('cost.json', 'r', encoding='utf-8') as file:
     cost = file.read()
+    cost = json.loads(cost)
 def check_decorator(func):
     def wrapper(*args, **kwargs):
         print("\n" + "="*30)
@@ -72,11 +80,13 @@ def buy(buskett):
 def printMenu():
     print('Меню: ')
     for i in range(1, 8):
-        print(f'   {i}){menu[i]}: {cost[menu[i]]}')
+        menu_ = str(i)
+        print(f'   {i}){dpath.get(menu, menu_)}: {dpath.get(cost, dpath.get(menu, menu_))}')
 def printMenu18():
     print('Меню: ')
     for i in range(1, 9):
-        print(f'   {i}){menu18[i]}: {cost[menu18[i]]}')
+        menu18_ = str(i)
+        print(f'   {i}){dpath.get(menu18, menu18_)}: {dpath.get(cost, dpath.get(menu18, menu18_))}')
 def print_menu(born_year):
     if 2024-born_year>=18:
         printMenu18()
