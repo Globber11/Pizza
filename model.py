@@ -10,6 +10,7 @@ with open('cost.json', 'r', encoding='utf-8') as file:
 
 def reg_and_create_id():
     with open("logs.txt", "a", encoding='utf-8') as file:
+        file.write(f'\n')
         file.write(f'\nНачат процесс регистрации/авторизации')
     def load_users():
         try:
