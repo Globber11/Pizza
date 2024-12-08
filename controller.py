@@ -36,29 +36,29 @@ def user(bornn_year):
 
 def admin():
     print('Добро пожаловать в панель администратора пиццерии!')
-    print('Доступные функции: 1 - вывод логов     2 - чистка логов     3 - вывод данных пользователей     4 - изменение стоимости товаров     5 - просмотр кол-ва продуктов на складе')
+    print('Доступные функции:\n 1 - вывод логов    \n 2 - чистка логов    \n 3 - вывод данных пользователей    \n 4 - изменение стоимости товаров    \n 5 - просмотр кол-ва продуктов на складе')
     while True:
         func_choise = int(input())
 
         if func_choise == 1:
             with open('logs.txt', 'r', encoding='utf-8') as file:
-                logs = file.read
+                logs = file.read()
             print(logs)
         elif func_choise == 2:
             with open('logs.txt', 'w', encoding='utf-8') as file:
                 file.write('')
         elif func_choise == 3:
             with open('users_data.json', 'r', encoding='utf-8') as file:
-                users_data = file.read
+                users_data = file.read()
             print(users_data)
         elif func_choise == 4:
             with open('cost.json', 'r', encoding='utf-8') as file:
-                costs = file.read
+                costs = file.read()
             print(f'Нынешние цены: {costs}')
             edit_cost(input('Продукт: '), int(input('Новая цена: ')))
         elif func_choise == 5:
             with open('products.json', 'r', encoding='utf-8') as file:
-                poducts = file.read
+                poducts = file.read()
             print(poducts)
 def openPizza():
     born_year = reg_and_create_id()
