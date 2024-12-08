@@ -61,13 +61,6 @@ def reg_and_create_id():
 
     users = load_users()
 
-    for user in users:
-        if user['user_id'] == user_id:
-            print(f'Пользователь с ID {user_id} уже зарегистрирован.')
-            with open("logs.txt", "a", encoding='utf-8') as file:
-                file.write(f'\nТакой пользователь уже зареган под ID {user_id}')
-            return
-
     user_data = {
         'user_id': user_id,
         'name': name,
@@ -75,6 +68,13 @@ def reg_and_create_id():
         'phone_number': phone_number,
         'born_year': born_year
     }
+    
+    for user in users:
+        if user['user_id'] == user_id:
+            print(f'Пользователь с ID {user_id} уже зарегистрирован.')
+            with open("logs.txt", "a", encoding='utf-8') as file:
+                file.write(f'\nТакой пользователь уже зареган под ID {user_id}')
+            return user_data['born_year']
 
     users.append(user_data)
     save_users(users)
