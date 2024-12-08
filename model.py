@@ -256,7 +256,10 @@ def craftPizza():
     # Загрузка продуктов из файла
     with open('products.json', 'r', encoding='utf-8') as file:
         products = json.load(file)
-
+    # Загрузка продуктов из файла
+    with open('pizzaProductsCost.json', 'r', encoding='utf-8') as file:
+        pizzaProductsCost = json.load(file)
+    pizzaCost = pizzaProductsCost['тесто']
     print('Выберите то, из чего вы хотите сделать пиццу:')
 
     # Показать продукты с 2 по 5
@@ -301,11 +304,12 @@ def craftPizza():
         except Exception as e:
             print(f"Произошла непредвиденная ошибка: {e}")
             continue
-
         # Запрос на продолжение добавления ингредиентов
         if input('Если хотите продолжить добавление ингредиентов, введите 1, иначе любой другой символ: ') == '1':
+            pizzaCost += pizzaProductsCost[productName]*productQuantity
             continue
         else:
-            break
+            pizzaCost += pizzaProductsCost[productName] * productQuantity
+            return pizzaCost
 
 
