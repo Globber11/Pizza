@@ -65,5 +65,7 @@ def openPizza():
 
     if born_year == True:
         admin()
+        with open("logs.txt", "a", encoding='utf-8') as file:
+            file.write(f'\nВыполнен вход в панель администратора')
     else:
         user(born_year)
