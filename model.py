@@ -163,54 +163,54 @@ def edit_cost(product, new_cost):
 
 def check_consumption(number_product):
     if number_product == 1:
-        if warehouse("тесто", 200) == False:
+        if not warehouse("тесто", 200):
             return False
-        if warehouse("пепперони", 20) == False:
+        if not warehouse("пепперони", 20):
             return False
-        if warehouse("сыр", 40) == False:
+        if not warehouse("сыр", 40):
             return False
     elif number_product == 2:
-        if warehouse("тесто", 200) == False:
+        if not warehouse("тесто", 200):
             return False
-        if warehouse("томаты", 30) == False:
+        if not warehouse("томаты", 30):
             return False
-        if warehouse("сыр", 40) == False:
+        if not warehouse("сыр", 40):
             return False
     elif number_product == 3:
-        if warehouse("тесто", 200) == False:
+        if not warehouse("тесто", 200):
             return False
-        if warehouse("сыр", 100) == False:
+        if not warehouse("сыр", 100):
             return False
     elif number_product == 4:
-        if warehouse("тесто", 200) == False:
+        if not warehouse("тесто", 200):
             return False
-        if warehouse("сыр", 40) == False:
+        if not warehouse("сыр", 40):
             return False
-        if warehouse("ветчина", 30) == False:
+        if not warehouse("ветчина", 30):
             return False
-        if warehouse("грибы", 30) == False:
+        if not warehouse("грибы", 30):
             return False
     elif number_product == 5 and 2024 - born_year >= 18:
         return True
     elif number_product == 5 and 2024 - born_year < 18:
-        if warehouse("тесто", 90) == False:
+        if not warehouse("тесто", 90):
             return False
-        if warehouse("сыр", 30) == False:
+        if not warehouse("сыр", 30):
             return False
-        if warehouse("грибы", 20) == False:
+        if not warehouse("грибы", 20):
             return False
-        if warehouse("пепперони", 20) == False:
+        if not warehouse("пепперони", 20):
             return False
     elif number_product == 6 and 2024 - born_year >= 18:
-        if warehouse("кола", 40) == False:
+        if not warehouse("кола", 40):
             return False
-        if warehouse("виски", 30) == False:
+        if not warehouse("виски", 30):
             return False
     elif number_product == 6 and 2024 - born_year < 18:
-        if warehouse("сок", 70) == False:
+        if not warehouse("сок", 70):
             return False
     elif number_product == 7 and 2024 - born_year >= 18:
-        if warehouse("кальянная_таблетка", 50) == False:
+        if not warehouse("кальянная_таблетка", 50):
             return False
 def beerTypes():
     with open('products.json', 'r', encoding='utf-8') as file:
