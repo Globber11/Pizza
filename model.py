@@ -34,6 +34,7 @@ def reg_and_create_id():
     print('Введите по очереди свои данные:')
 
     name = input('Имя:')
+    
     last_name = input('Фамилия:')
 
     while True:
@@ -50,6 +51,9 @@ def reg_and_create_id():
     while True:
         try:
             born_year = int(input('Год рождения:'))
+            if born_year < 1900:
+                print(f'Кому ты {\displaystyle {\boldsymbol {\pi }}}здиш, тебе точно не больше ста лет')
+                continue
             break
         except ValueError:
             with open("logs.txt", "a", encoding='utf-8') as file:
