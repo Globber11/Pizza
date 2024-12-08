@@ -1,12 +1,17 @@
 import json
 from random import seed, random
 
+import dpath
+
 with open('menu18.json', 'r', encoding='utf-8') as file:
     menu18 = file.read()
-with open('menu18.json', 'r', encoding='utf-8') as file:
+    menu18 = json.loads(menu18)
+with open('menu.json', 'r', encoding='utf-8') as file:
     menu = file.read()
+    menu = json.loads(menu)
 with open('cost.json', 'r', encoding='utf-8') as file:
     cost = file.read()
+    cost = json.loads(cost)
 
 def reg_and_create_id():
     with open("logs.txt", "a", encoding='utf-8') as file:
@@ -89,24 +94,24 @@ def reg_and_create_id():
 
 def busketSave(buskett, userIn, born_year, userNum=1):
     if 2024-born_year<18:
-        if menu[userIn] in buskett:
-            buskett[buskett.index(menu[userIn])+2]+=userNum
+        if dpath.get(menu, str(userIn)) in buskett:
+            buskett[buskett.index(dpath.get(menu, str(userIn)))+2]+=userNum
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
         else:
-            buskett.append(menu[userIn])
-            buskett.append(cost[menu[userIn]])
+            buskett.append(dpath.get(menu, str(userIn)))
+            buskett.append(dpath.get(cost, dpath.get(menu, str(userIn))))
             buskett.append(userNum)
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
     else:
-        if menu[userIn] in buskett:
-            buskett[buskett.index(menu18[userIn])+2]+=userNum
+        if dpath.get(menu, str(userIn)) in buskett:
+            buskett[buskett.index(dpath.get(menu18, str(userIn)))+2]+=userNum
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
         else:
-            buskett.append(menu18[userIn])
-            buskett.append(cost[menu18[userIn]])
+            buskett.append(dpath.get(menu18, str(userIn)))
+            buskett.append(dpath.get(cost, dpath.get(menu18, str(userIn))))
             buskett.append(userNum)
             with open("logs.txt", "a", encoding='utf-8') as file:
                 file.write(f'\nДобавлено в корзину {userNum} {userIn}')
