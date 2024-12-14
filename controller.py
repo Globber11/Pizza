@@ -6,6 +6,7 @@ from model import edit_cost
 from view import buy
 from view import check
 from view import print_menu
+from model import beerTypes
 
 busket = []
 def user(bornn_year):
@@ -18,6 +19,10 @@ def user(bornn_year):
             user_number = craftPizza()
         elif user_input == 7 and 2024-bornn_year<18:
             user_number = craftPizza()
+        elif user_input == 5 and 2024-bornn_year>=18:
+            files = beerTypes()
+            user_input = files[0]
+            user_number = files[2]
         else:
             user_number = int(input('введите количество: '))
         busketSave(busket, user_input, bornn_year, user_number)
@@ -69,4 +74,5 @@ def openPizza():
                 file.write(f'\nПользователь вошёл в админку')
     else:
         user(born_year)
+
 
