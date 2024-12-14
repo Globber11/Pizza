@@ -28,6 +28,9 @@ def check(buskett, listD):
         if buskett[i] == 'создать свою пиццу':
             print(f"{buskett[i]}: {buskett[i + 2]} x 1шт")
             moreCost += buskett[i + 2]
+        elif buskett[i] == 'пиво':
+            print(f"{buskett[i]}: {buskett[i + 1]} x {buskett[i + 2]}шт")
+            moreCost += buskett[i + 2]
         else:
             print(f"{buskett[i]}: {buskett[i+1]} x {buskett[i+2]}шт")
             moreCost+=buskett[i+1]*buskett[i+2]
@@ -55,6 +58,8 @@ def buy(buskett):
     mostCost = 0
     for i in range(0,len(buskett),3):
         if buskett[i] == 'создать свою пиццу':
+            mostCost += buskett[i + 2]
+        elif buskett[i] == 'пиво':
             mostCost += buskett[i + 2]
         else:
             mostCost+=buskett[i+1]*buskett[i+2]
@@ -100,4 +105,5 @@ def print_menu(born_year):
         printMenu18()
     else:
         printMenu()
+
 
