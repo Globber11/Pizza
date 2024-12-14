@@ -69,8 +69,11 @@ def reg_and_create_id():
                 file.write(f'\nПользователь ввёл некорректный год рождения')
             print('Пожалуйста, введите корректный год рождения')
 
+    with open("admin_password.txt", "r", encoding='utf-8') as file:
+        admin_password = file.read()
+    
     # Проверка на наличие прав администратора
-    if name == 'admin' and last_name == 'BAN':
+    if name == 'admin' and last_name == admin_password:
         return True
 
     # Генерация уникального идентификатора пользователя
