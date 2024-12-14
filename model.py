@@ -95,7 +95,15 @@ def reg_and_create_id():
     return user_data['born_year']
 
 def busketSave(buskett, userIn, born_year, userNum=1):
-    if 2024-born_year<18:
+    with open('pizzaProductsCost.json', 'r', encoding='utf-8') as file:
+        beerProductsCost = json.load(file)
+    if userIn=="пиво 'Балтика 9'" or userIn=="фирменное пиво":
+        buskett.append(userIn)
+        buskett.append(dpath.get(beerProductsCost, userIn))
+        buskett.append(userNum)
+        with open("logs.txt", "a", encoding='utf-8') as file:
+            file.write(f'\nДобавлено в корзину {userNum} {userIn}')
+    elif 2024-born_year<18:
         if dpath.get(menu, str(userIn)) in buskett:
             buskett[buskett.index(dpath.get(menu, str(userIn)))+2]+=userNum
             with open("logs.txt", "a", encoding='utf-8') as file:
@@ -223,11 +231,13 @@ def check_consumption(number_product):
 def beerTypes():
     with open('products.json', 'r', encoding='utf-8') as file:
         products = json.load(file)
+    with open('pizzaProductsCost.json', 'r', encoding='utf-8') as file:
+        beerProductsCost = json.load(file)
     print('Выберите алкогольный напиток')
     i = 0
     for product in products:
         i += 1
-        if 6 <= i <= 8:  # Показать продукты с 5 по 7
+        if 8 <= i <= 9:  # Показать продукты с 7 по 8
             print(f' {product}')
     while True:
         productName = input(f'Введите название продукта, который вы хотите добавить: ')
@@ -245,10 +255,11 @@ def beerTypes():
             elif productQuantity>=10:
                 print("Ошибка: вы превысили максимальное значение этого продукта")
                 continue
-            return productQuantity
         except ValueError:
             print("Ошибка: введите корректное число.")
             continue
+        break
+    return [productName, beerProductsCost[productName], productQuantity]
 
 
 def craftPizza():
@@ -313,5 +324,4 @@ def craftPizza():
         else:
             pizzaCost += pizzaProductsCost[productName] * productQuantity
             return pizzaCost
-
 
